@@ -1,9 +1,8 @@
 defmodule EsBank.Tellers.Commands.WithdrawMoney do
-  defstruct [:account_id, :amount, :old_balance, :new_balance]
+  defstruct [:teller_id, :account_id, :amount]
   use EsBank.Support.Command
 
+  validates :teller_id, presence: true, uuid: true
   validates :account_id, presence: true, uuid: true
   validates :amount, &valid_amount/1
-  validates :old_balance, &valid_amount/1
-  validates :new_balance, &valid_amount/1
 end

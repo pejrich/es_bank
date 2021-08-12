@@ -4,9 +4,9 @@ defmodule EsBank.Router do
   middleware(EsBank.Support.SomeMiddleware)
 
   ################################################################################
-  ## Account
+  ## Accounts
   ################################################################################
-  alias EsBank.Handlers.AccountHandler
+  alias EsBank.Accounts.Handlers.AccountHandler
   alias EsBank.Lifespans.AccountLifespan
   alias EsBank.Accounts.Commands.{OpenAccount, DepositMoney, WithdrawMoney}
   alias EsBank.Accounts.Aggregates.{Account}
@@ -16,6 +16,19 @@ defmodule EsBank.Router do
     lifespan: AccountLifespan,
     aggregate: Account,
     identity: :account_id
+  )
+
+  ################################################################################
+  ## Tellers
+  ################################################################################
+  alias EsBank.Tellers.Handlers.AtmMachineHandler
+  alias EsBank.Tellers.Commands.{InitiateWithdrawl, DepositMoney, WithdrawMoney}
+  alias EsBank.Tellers.Aggregates.AtmMachine
+
+  dispatch([InitiateWithdrawl, DepositMoney, WithdrawMoney],
+    to: AtmMachineHandler,
+    aggregate: AtmMachine,
+    identity: :teller_id
   )
 
   # dispatch DepositMoney, to: DepositMoneyHandler, aggregate: BankAccount, identity: :account_number

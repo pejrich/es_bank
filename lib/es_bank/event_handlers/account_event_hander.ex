@@ -6,12 +6,12 @@ defmodule EsBank.EventHandlers.AccountEventHandler do
     alias EsBank.Accounts.Events.{MoneyDeposited, MoneyWithdrawn}
 
   def handle(%MoneyDeposited{} = cmd, _metadata) do
-    EsBank.App.write_transaction(%{account_id: cmd.account_id, txn_type: "DEPOSIT", txn_data: "#{cmd.amount} deposited."})
+    # EsBank.App.write_transaction(%{account_id: cmd.account_id, txn_type: "DEPOSIT", txn_data: "#{cmd.amount} deposited."})
     :ok
   end
 
   def handle(%MoneyWithdrawn{} = cmd, _metadata) do
-    EsBank.App.write_transaction(%{account_id: cmd.account_id, txn_type: "WITHDRAW", txn_data: "#{cmd.amount} withdrawn."})
+    # EsBank.App.write_transaction(%{account_id: cmd.account_id, txn_type: "WITHDRAW", txn_data: "#{cmd.amount} withdrawn."})
     :ok
   end
 end

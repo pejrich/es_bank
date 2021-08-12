@@ -1,15 +1,14 @@
-defmodule EsBank.Tellers.Events.WithdrawlInitiated do
+defmodule EsBank.Tellers.Events.MoneyWithdrawn do
   @derive Jason.Encoder
-  defstruct [:account_id, :amount, :old_balance, :new_balance]
+  defstruct [:teller_id, :account_id, :amount]
 
-  alias EsBank.Tellers.Commands.InitiateWithdrawl
+  alias EsBank.Tellers.Commands.WithdrawMoney
 
-  def from_command(%WithdrawMoney{amount: amt_deposited} = cmd, old_balance, new_balance) when is_integer(old_balance) and is_integer(new_balance) and new_balance - old_balance == amt_deposited do
+  def from_command(%WithdrawMoney{} = cmd) do
     %__MODULE__{
+      teller_id: cmd.teller_id,
       account_id: cmd.account_id,
-      amount: cmd.amount,
-      old_balance: old_balance,
-      new_balance: new_balance
+      amount: cmd.amount
     }
   end
 end

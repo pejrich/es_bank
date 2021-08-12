@@ -30,3 +30,19 @@ data: BINARY_JSON_DATA
 metadata: BINARY_JSON_DATA
 created_at: 2021-08-11 19:00:03.186651-07
 ```
+
+acct = EsBank.Accounts.open_account(%{owner: "Peter", pin: "1234"})
+acct = EsBank.Accounts.deposit_money_into_account(%{account_id: acct.id, amount: 50000})
+resp = EsBank.Tellers.withdraw_money_from_atm(%{account_id: acct.id, pin: "1234", amount: 10000})
+
+cmd = %EsBank.Tellers.Commands.InitiateWithdrawl{account_id: acct.id, teller_id: EsBank.Tellers.Aggregates.AtmMachine.fixed_id(), amount: 10000, pin: "2468"}
+EsBank.Router.dispatch(cmd, [application: EsBank.App, consistency: :strong, execution_result: true])
+
+Teller.InitiateWithdrawl
+  Accounts.ConfirmAuthorization
+  Accounts.AuthorizationConfirmed
+Teller.WithdrawInitiated
+Teller.WithdrawMoney
+  Accounts.WithdrawMoney
+  Accounts.MoneyWithdrawn
+Teller.MoneyWithdrawn

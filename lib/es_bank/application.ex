@@ -20,6 +20,7 @@ defmodule EsBank.Application do
       # Start a worker by calling: EsBank.Worker.start_link(arg)
       EsBank.Accounts.Projectors.Account,
       EsBank.EventHandlers.AccountEventHandler,
+      EsBank.ProcessMangers.AtmProcessManager,
       # {EsBank.Worker, arg}
     ]
 

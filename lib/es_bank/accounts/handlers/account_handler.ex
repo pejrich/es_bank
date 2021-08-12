@@ -1,4 +1,4 @@
-defmodule EsBank.Handlers.AccountHandler do
+defmodule EsBank.Accounts.Handlers.AccountHandler do
   alias EsBank.Accounts.Aggregates.Account
   alias EsBank.Accounts.Commands.{OpenAccount, DepositMoney, WithdrawMoney}
   alias EsBank.Accounts.Events.{AccountOpened, MoneyDeposited, MoneyWithdrawn}
