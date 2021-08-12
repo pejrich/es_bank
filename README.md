@@ -1,5 +1,7 @@
 # EsBank
 
+A lot code here is for example purposes and not fully or correctly implemented(lifespans and middleware for example)
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
