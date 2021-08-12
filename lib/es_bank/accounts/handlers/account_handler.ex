@@ -17,7 +17,7 @@ defmodule EsBank.Accounts.Handlers.AccountHandler do
     MoneyDeposited.from_command(cmd, bal, bal + amt)
   end
 
-  def handle(%Account{balance: bal}, %WithdrawMoney{amount: amt} = cmd) when bal > amt do
+  def handle(%Account{balance: bal}, %WithdrawMoney{amount: amt} = cmd) when bal >= amt do
     MoneyWithdrawn.from_command(cmd, bal, bal - amt)
   end
 

@@ -4,6 +4,8 @@ defmodule EsBank.Accounts.Aggregates.Account do
 
   alias EsBank.Accounts.Events.{AccountOpened, MoneyDeposited, MoneyWithdrawn}
 
+  def projection_module, do: EsBank.Accounts.Projections.Account
+
   ################################################################################
   ## State Mutators
   ################################################################################
@@ -18,10 +20,10 @@ defmodule EsBank.Accounts.Aggregates.Account do
   end
 
   def apply(%__MODULE__{} = acct, %MoneyDeposited{} = event) do
-    %__MODULE__{acct | balance: event.new_balance}
+    %{acct | balance: acct.balance + event.amount}
   end
 
   def apply(%__MODULE__{} = acct, %MoneyWithdrawn{} = event) do
-    %__MODULE__{acct | balance: event.new_balance}
+    %{acct | balance: event.new_balance}
   end
 end
