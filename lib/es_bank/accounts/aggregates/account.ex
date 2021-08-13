@@ -4,8 +4,6 @@ defmodule EsBank.Accounts.Aggregates.Account do
 
   alias EsBank.Accounts.Events.{AccountOpened, MoneyDeposited, MoneyWithdrawn}
 
-  def projection_module, do: EsBank.Accounts.Projections.Account
-
   ################################################################################
   ## State Mutators
   ################################################################################
